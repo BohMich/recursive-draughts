@@ -9,9 +9,11 @@ namespace recursive_draughts
         private int x;
         private int y;
 
+        private Pawn pawn; 
+
         public Field()
         {
-
+            pawn = null;
         }
         public int X
         {
@@ -35,6 +37,15 @@ namespace recursive_draughts
                     y = value;
                 }
                 else throw new Exception();
+            }
+        }
+
+        public Pawn Pawn
+        {
+            get { return pawn; }    
+            set
+            {
+                pawn = value;
             }
         }
     }

@@ -7,14 +7,15 @@ namespace recursive_draughts
     public class Pawn
     {
         private readonly string colour;
+        public static string[] colours = { "WHITE", "BLACK" };
 
         public Pawn(string colour)
         {
-            if (colour == "black")
+            if (colour == colours[0])
             {
                 this.colour = colour;
             }
-            else if (colour == "white")
+            else if (colour == colours[1])
             {
                 this.colour = colour;
             }

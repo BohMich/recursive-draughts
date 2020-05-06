@@ -13,24 +13,24 @@ namespace Tests_recursive_draughts
         [Test]
         public void ShouldInitialize()
         {
-            Pawn classUnderTest = new Pawn("black");
+            Pawn classUnderTest = new Pawn(Pawn.colours[1]);
         }
 
         [Test]
         public void ShouldReturnColourBlack()
         {
-            Pawn classUnderTest = new Pawn("black");
+            Pawn classUnderTest = new Pawn(Pawn.colours[1]);
 
-            var expectedColour = "black";
+            var expectedColour = "BLACK";
             var actualColour = classUnderTest.Colour;
             Assert.AreEqual(expectedColour, actualColour);
         }
         [Test]
         public void ShouldReturnColourWhite()
         {
-            Pawn classUnderTest = new Pawn("white");
+            Pawn classUnderTest = new Pawn(Pawn.colours[0]);
 
-            var expectedColour = "white";
+            var expectedColour = "WHITE";
             var actualColour = classUnderTest.Colour;
             Assert.AreEqual(expectedColour, actualColour);
         }
@@ -62,6 +62,7 @@ namespace Tests_recursive_draughts
 
             }
         }
+        [Test]
         public void ShouldRejectInvalidFormat()
         {
             try

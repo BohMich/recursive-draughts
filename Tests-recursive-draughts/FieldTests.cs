@@ -1,7 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Windows;
+using System.Xml;
+using NuGet.Frameworks;
 using NUnit.Framework;
+using NUnit.Framework.Internal;
 using recursive_draughts;
 
 namespace Tests_recursive_draughts
@@ -19,7 +23,7 @@ namespace Tests_recursive_draughts
         {
             Field classUnderTest = new Field();
 
-            
+
             var expectedX = 5;
             var actualX = classUnderTest.X = 5;
 
@@ -39,7 +43,7 @@ namespace Tests_recursive_draughts
             {
 
             }
-            
+
         }
         [Test]
         public void ShouldRejectXAs10()
@@ -136,11 +140,90 @@ namespace Tests_recursive_draughts
             try
             {
                 classUnderTest.Y = -3;
+                Assert.Fail();
+            }
+            catch
+            {
+
+            }
+        }
+        [Test]
+        public void ShouldAddNewPawn()
+        {
+            Pawn testPawn = new Pawn(Pawn.colours[0]);
+
+            Field classUnderTest = new Field();
+            
+            try
+            {
+                classUnderTest.Pawn = testPawn;
             }
             catch
             {
                 Assert.Fail();
             }
         }
+        [Test]
+        public void ShouldInsertWhitePawn()
+        {
+            TestAddPawn(Pawn.colours[0]);
+        }
+        [Test]
+        public void ShoudInsertBlackPawn()
+        {
+            TestAddPawn(Pawn.colours[1]);
+        }
+        [Test]
+        public void ShouldRemovePawn()
+        {
+            Pawn testPawn = new Pawn(Pawn.colours[0]);
+
+            Field classUnderTest = new Field();
+
+            try
+            {
+                classUnderTest.Pawn = null;
+            }
+            catch
+            {
+                Assert.Fail();
+            }
+        }
+        [Test]
+        public void ShouldReturnWhitePawn()
+        {
+            Pawn testPawn = new Pawn(Pawn.colours[0]);
+
+            Field classUnderTest = new Field();
+
+            classUnderTest.Pawn = testPawn;
+
+            if(classUnderTest.Pawn.Colour == "WHITE")
+            {
+                Assert.Pass();
+            }
+            else
+            {
+                Assert.Fail();
+            }
+        }
+
+        private void TestAddPawn(string colour)
+        {
+            Pawn testPawn = new Pawn(colour);
+
+            Field classUnderTest = new Field();
+
+            try
+            {
+                classUnderTest.Pawn = testPawn;
+            }
+            catch
+            {
+                Assert.Fail();
+            }
+        }
+        
+
     }
 }
