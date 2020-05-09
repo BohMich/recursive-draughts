@@ -5,8 +5,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:recursive_draughts"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="565" Width="800">
     <Grid>
+        <Rectangle HorizontalAlignment="Left" Height="330" Margin="10,10,0,0" Stroke="Black" VerticalAlignment="Top" Width="346"/>
+
+        <TextBlock Text="{Binding Display}" HorizontalAlignment="Left" Margin="15,15,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="320" Width="336"/>
 
     </Grid>
 </Window>

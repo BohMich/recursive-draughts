@@ -207,6 +207,17 @@ namespace Tests_recursive_draughts
                 Assert.Fail();
             }
         }
+        [Test]
+        public void ShouldReturnXYVector0x0()
+        {
+            Field classUnderTest = new Field();
+            classUnderTest.X = 0;
+            classUnderTest.Y = 0;
+            var actual = classUnderTest.GetPosition();
+            int[] expected = { 0, 0 };
+
+            Assert.AreEqual(expected, actual);
+        }
 
         private void TestAddPawn(string colour)
         {

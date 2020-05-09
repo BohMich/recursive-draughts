@@ -1,15 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Numerics;
 using System.Text;
 
 namespace recursive_draughts
 {
-    public class Field
+    public class Field : IField
     {
         private int x;
         private int y;
 
-        private Pawn pawn; 
+        private Pawn pawn;
 
         public Field()
         {
@@ -42,11 +43,17 @@ namespace recursive_draughts
 
         public Pawn Pawn
         {
-            get { return pawn; }    
+            get { return pawn; }
             set
             {
                 pawn = value;
             }
+        }
+        public int[] GetPosition()
+        {
+            int[] position = { x, y };
+
+            return position;
         }
     }
 }

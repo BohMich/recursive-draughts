@@ -1,4 +1,5 @@
-﻿using System;
+﻿using recursive_draughts.architecture;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,6 +23,10 @@ namespace recursive_draughts
     {
         public MainWindow()
         {
+            var viewModel = new ViewModel();
+            
+            DataContext = viewModel;
+            
             InitializeComponent();
         }
     }
