@@ -29,5 +29,7 @@ namespace recursive_draughts
             
             InitializeComponent();
         }
+
+      
     }
 }

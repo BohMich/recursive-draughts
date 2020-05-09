@@ -6,16 +6,16 @@ namespace recursive_draughts
 {
     public class Pawn
     {
+        private int id;
         private readonly string colour;
-        public static string[] colours = { "WHITE", "BLACK" };
 
         public Pawn(string colour)
         {
-            if (colour == colours[0])
+            if (colour == Team._COLOURS[0])
             {
                 this.colour = colour;
             }
-            else if (colour == colours[1])
+            else if (colour == Team._COLOURS[1])
             {
                 this.colour = colour;
             }
@@ -25,6 +25,19 @@ namespace recursive_draughts
         public string Colour
         {
             get { return colour; }
+        }
+        public int Id
+        {
+            get { return id; }
+            set
+            {
+                if (value >= 0)
+                {
+                    id = value;
+                }
+                else throw new Exception();
+            }
+
         }
     }
 }

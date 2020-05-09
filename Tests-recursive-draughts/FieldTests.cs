@@ -150,7 +150,7 @@ namespace Tests_recursive_draughts
         [Test]
         public void ShouldAddNewPawn()
         {
-            Pawn testPawn = new Pawn(Pawn.colours[0]);
+            Pawn testPawn = new Pawn(Team._COLOURS[0]);
 
             Field classUnderTest = new Field();
             
@@ -166,17 +166,17 @@ namespace Tests_recursive_draughts
         [Test]
         public void ShouldInsertWhitePawn()
         {
-            TestAddPawn(Pawn.colours[0]);
+            TestAddPawn(Team._COLOURS[0]);
         }
         [Test]
         public void ShoudInsertBlackPawn()
         {
-            TestAddPawn(Pawn.colours[1]);
+            TestAddPawn(Team._COLOURS[1]);
         }
         [Test]
         public void ShouldRemovePawn()
         {
-            Pawn testPawn = new Pawn(Pawn.colours[0]);
+            Pawn testPawn = new Pawn(Team._COLOURS[0]);
 
             Field classUnderTest = new Field();
 
@@ -192,7 +192,7 @@ namespace Tests_recursive_draughts
         [Test]
         public void ShouldReturnWhitePawn()
         {
-            Pawn testPawn = new Pawn(Pawn.colours[0]);
+            Pawn testPawn = new Pawn(Team._COLOURS[0]);
 
             Field classUnderTest = new Field();
 

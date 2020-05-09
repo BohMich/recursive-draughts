@@ -13,13 +13,13 @@ namespace Tests_recursive_draughts
         [Test]
         public void ShouldInitialize()
         {
-            Pawn classUnderTest = new Pawn(Pawn.colours[1]);
+            Pawn classUnderTest = new Pawn(Team._COLOURS[1]);
         }
 
         [Test]
         public void ShouldReturnColourBlack()
         {
-            Pawn classUnderTest = new Pawn(Pawn.colours[1]);
+            Pawn classUnderTest = new Pawn(Team._COLOURS[1]);
 
             var expectedColour = "BLACK";
             var actualColour = classUnderTest.Colour;
@@ -28,7 +28,7 @@ namespace Tests_recursive_draughts
         [Test]
         public void ShouldReturnColourWhite()
         {
-            Pawn classUnderTest = new Pawn(Pawn.colours[0]);
+            Pawn classUnderTest = new Pawn(Team._COLOURS[0]);
 
             var expectedColour = "WHITE";
             var actualColour = classUnderTest.Colour;
@@ -68,6 +68,31 @@ namespace Tests_recursive_draughts
             try
             {
                 Pawn classUnderTest = new Pawn("BlAck ");
+                Assert.Fail();
+            }
+            catch
+            {
+
+            }
+        }
+        [Test] 
+        public void ShouldSetID5()
+        {
+            Pawn classUnderTest = new Pawn(Team._COLOURS[0]);
+            var expected = 5;
+
+            classUnderTest.Id = 5;
+
+            Assert.AreEqual(expected, classUnderTest.Id);
+        }
+        [Test]
+        public void ShouldRejectNegativeID()
+        {
+            Pawn classUnderTest = new Pawn(Team._COLOURS[0]);
+            
+            try
+            {
+                classUnderTest.Id = -5;
                 Assert.Fail();
             }
             catch
