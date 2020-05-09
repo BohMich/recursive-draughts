@@ -10,7 +10,8 @@
         <Rectangle HorizontalAlignment="Left" Height="330" Margin="10,10,0,0" Stroke="Black" VerticalAlignment="Top" Width="346"/>
 
         <TextBlock Text="{Binding Display}" HorizontalAlignment="Left" Margin="15,15,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="320" Width="336"/>
-        <Button Content="Button_StartNewGame" HorizontalAlignment="Left" Margin="380,15,0,0" VerticalAlignment="Top" Height="80" Width="116"/>
+        <Button Command="{Binding cmdStartExecution}" Content="TestDisplay" HorizontalAlignment="Left" Margin="380,15,0,0" VerticalAlignment="Top" Height="80" Width="116"/>
+        <Button Command="{Binding cmdStartNewGame}" Content="Start New Game" HorizontalAlignment="Left" Margin="380,113,0,0" VerticalAlignment="Top" Height="62" Width="138"/>
 
     </Grid>
 </Window>

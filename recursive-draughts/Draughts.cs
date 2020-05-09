@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace recursive_draughts.architecture
+namespace recursive_draughts
 {
-    class ViewModelLocator
+    class Draughts
     {
     }
 }

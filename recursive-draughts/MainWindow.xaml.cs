@@ -21,15 +21,17 @@ namespace recursive_draughts
     /// </summary>
     public partial class MainWindow : Window
     {
+        private readonly ViewModel _viewModel;
+
         public MainWindow()
         {
-            var viewModel = new ViewModel();
-            
-            DataContext = viewModel;
-            
             InitializeComponent();
+            _viewModel = new ViewModel();
+
+            DataContext = _viewModel;
         }
 
-      
+
+        
     }
 }
