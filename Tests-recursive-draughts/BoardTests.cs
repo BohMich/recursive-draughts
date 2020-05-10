@@ -7,12 +7,26 @@ using System.Net.Mail;
 using NUnit.Framework.Constraints;
 using Moq;
 using Newtonsoft.Json.Bson;
+using System.Security.Cryptography.X509Certificates;
 
 namespace Tests_recursive_draughts
 {
     [TestFixture]
     class BoardTests
     {
+        private Mock<IPawn> _mockPawn;
+        private Mock<ITeam> _teamWhite;
+        private Mock<ITeam> _teamBlack;
+
+
+        [SetUp]
+        public void TestsSetup()
+        {
+            _mockPawn = new Mock<IPawn>();
+            _teamWhite = new Mock<ITeam>();
+            _teamBlack = new Mock<ITeam>();
+        }
+           
         [Test]
         public void ShouldInitialize()
         {
@@ -87,6 +101,148 @@ namespace Tests_recursive_draughts
         {
             CheckFailTryCatch(1, 11);
         }
+        [Test]
+        public void ShouldAddPawnCheckByID()
+        {
+            //Test pawn by checking ID
+            var classUnderTest = InitializeWithBoard();
+          
+            _mockPawn.Setup(m => m.Id).Returns(1);
+            _mockPawn.Setup(m => m.Colour).Returns(Team._COLOURS[0]);
+
+            classUnderTest.AddPawn(0, 0, _mockPawn.Object);
+            var expectedID = 1;
+
+            Assert.AreEqual(expectedID, classUnderTest.Fields[0, 0].Pawn.Id);
+        }
+        [Test]
+        public void ShouldAddPawnCheckByColour()
+        {
+            //Test pawn by checking ID
+            var classUnderTest = InitializeWithBoard();
+
+            _mockPawn.Setup(m => m.Id).Returns(1);
+            _mockPawn.Setup(m => m.Colour).Returns(Team._COLOURS[0]);
+
+            classUnderTest.AddPawn(0, 0, _mockPawn.Object);
+            var expectedColour = Team._COLOURS[0];
+
+            Assert.AreEqual(expectedColour, classUnderTest.Fields[0, 0].Pawn.Colour);
+        }
+        [Test]
+        public void ShouldAddAllWhiteAndBlackPawns()
+        {
+            Team testWhite = new Team();
+            testWhite.SetColour(Team._COLOURS[0]);
+            testWhite.RestPawns();
+
+            Team testBlack = new Team();
+            testBlack.SetColour(Team._COLOURS[1]);
+            testBlack.RestPawns();
+
+
+            var classUnderTest = InitializeWithBoard();
+            classUnderTest.GenerateNewBoard();
+
+            
+
+            classUnderTest.AddAllPawns(testWhite.Pawns, testBlack.Pawns);
+
+            var actual = classUnderTest.GetPawns().Count;
+            var expected = 40; //20 for each team;
+
+            Assert.AreEqual(expected, actual);
+        }
+        [Test]
+        public void ShouldReturnPos0x0AsEmpty()
+        {
+            var position = CheckPawnPosition(0, 0);
+            if(position.Pawn != null)
+            {
+                Assert.Pass();
+            }
+        }
+        [Test]
+        public void ShouldReturnPos0x1AsBlackPawn()
+        {
+            var position = CheckPawnPosition(0, 1);
+            var expected = Team._COLOURS[1];
+            var actual = position.Pawn.Colour;
+
+            Assert.AreEqual(expected, actual);
+
+        }
+        [Test]
+        public void ShouldReturnPos4x9AsEmpty()
+        {
+            var position = CheckPawnPosition(4, 9);
+            if (position.Pawn != null)
+            {
+                Assert.Pass();
+            }
+        }
+        [Test]
+        public void ShouldReturnPos9x9AsEmpty()
+        {
+            var position = CheckPawnPosition(9, 9);
+            if (position.Pawn != null)
+            {
+                Assert.Pass();
+            }
+        }
+        [Test]
+        public void ShouldReturnPos0x4AsEmpty()
+        {
+            var position = CheckPawnPosition(0, 4);
+            if (position.Pawn != null)
+            {
+                Assert.Pass();
+            }
+        }
+        [Test]
+        public void ShouldReturnPos0x4AsBlackPawn()
+        {
+            var position = CheckPawnPosition(0, 4);
+            var expected = Team._COLOURS[1];
+            var actual = position.Pawn.Colour;
+
+            Assert.AreEqual(expected, actual);
+
+        }
+        public IField CheckPawnPosition(int x, int y)
+        {
+            Team testWhite = new Team();
+            testWhite.SetColour(Team._COLOURS[0]);
+            testWhite.RestPawns();
+
+            Team testBlack = new Team();
+            testBlack.SetColour(Team._COLOURS[1]);
+            testBlack.RestPawns();
+
+            var classUnderTest = InitializeWithBoard();
+            classUnderTest.GenerateNewBoard();
+
+            classUnderTest.AddAllPawns(testWhite.Pawns, testBlack.Pawns);
+
+            return classUnderTest.Fields[x, y];
+
+        }
+        [Test]
+         public void ShouldReturnPawnCountOfPawnsOnTheBoardOnePawn()
+         {
+             var classUnderTest = InitializeWithBoard();
+             classUnderTest.GetPawns();
+
+            _mockPawn.Setup(m => m.Id).Returns(1);
+            _mockPawn.Setup(m => m.Colour).Returns(Team._COLOURS[0]);
+
+            classUnderTest.AddPawn(3, 3, _mockPawn.Object);
+            var actual = classUnderTest.GetPawns().Count;
+            var expected = 1;
+
+            Assert.AreEqual(expected,actual);
+        }
+
 
         private void CheckFailTryCatch(int x, int y)
         {
@@ -100,7 +256,6 @@ namespace Tests_recursive_draughts
 
             }
         }
-
         private void CheckReturnFieldNxN(int x, int y)
         {
             var classUnderTest = InitializeWithBoard();
@@ -112,10 +267,10 @@ namespace Tests_recursive_draughts
         }
         private Board InitializeWithBoard()
         {
-            var classUnderTest = new Mock<Board>();
-            classUnderTest.Object.GenerateNewBoard();
+            var classUnderTest = new Board();
+            classUnderTest.GenerateNewBoard();
             
-            return classUnderTest.Object;
+            return classUnderTest;
         }
     }
 }
