@@ -10,7 +10,7 @@ namespace recursive_draughts
         private int x;
         private int y;
 
-        private Pawn pawn;
+        private IPawn pawn;
 
         public Field()
         {
@@ -41,7 +41,7 @@ namespace recursive_draughts
             }
         }
 
-        public Pawn Pawn
+        public IPawn Pawn
         {
             get { return pawn; }
             set
@@ -49,6 +49,7 @@ namespace recursive_draughts
                 pawn = value;
             }
         }
+
         public int[] GetPosition()
         {
             int[] position = { x, y };

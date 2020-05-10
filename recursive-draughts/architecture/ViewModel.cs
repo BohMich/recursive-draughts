@@ -1,5 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Security.Cryptography.X509Certificates;
+using System.Text;
 using System.Windows.Input;
 
 namespace recursive_draughts.architecture
@@ -9,6 +11,9 @@ namespace recursive_draughts.architecture
         private string display;
         private RelayCommand _commandStart;
         private RelayCommand _commandStartNewGame;
+
+        private IDraughts _draughts;
+
         public ICommand cmdStartExecution
         {
             get
@@ -38,12 +43,50 @@ namespace recursive_draughts.architecture
         }
         private void StartNewGame()
         {
-            //Make connection with draughts. 
+            _draughts.StartNewGame();
+            Display = ResetDisplay();
         }
+
+        private string ResetDisplay()
+        {
+            var fields = _draughts.GetFields();
+            string display = "";
+            
+            for(int y = 0; y < 10; y++)
+            {
+                for(int x = 0; x < 10; x++)
+                {
+                    if(fields[x,y].Pawn != null)
+                    {
+                        display += " ";
+                        display += fields[x, y].Pawn.Colour;
+                        display += " ";
+                    }
+                    else
+                    {
+                        display += " _ ";
+                    }
+                }
+                display += "\n";
+            }
+
+            StringBuilder temp = new StringBuilder();
+            temp.Insert(0,display);
+            temp.Replace(Team._COLOURS[0].ToString(), "O");
+            temp.Replace(Team._COLOURS[1].ToString(), "X");
+
+            display = temp.ToString();
+
+            return display;
+        }
+
         public ViewModel()
         {
             display = "DISPLAY INITIALIZED";
+            _draughts = new Draughts();
         }
+
+
         public string Display
         {
             get { return display; }
@@ -63,6 +106,8 @@ namespace recursive_draughts.architecture
                 PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
             }
         }
+
+        
     }
 
     
