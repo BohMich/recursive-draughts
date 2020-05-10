@@ -4,7 +4,7 @@ using System.Text;
 
 namespace recursive_draughts
 {
-    public class Pawn : IPawn
+    public class Pawn
     {
         private int id;
         private readonly string colour;

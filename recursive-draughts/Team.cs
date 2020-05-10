@@ -4,18 +4,18 @@ using System.Text;
 
 namespace recursive_draughts
 {
-    public class Team : ITeam
+    public class Team
     {
-        private List<IPawn> pawns;
+        private List<Pawn> pawns;
         private string colour;
         public static string[] _COLOURS = { "WHITE", "BLACK" };
 
         public Team()
         {
-            pawns = new List<IPawn>();
+            pawns = new List<Pawn>();
         }
 
-        public List<IPawn> Pawns
+        public List<Pawn> Pawns
         {
             get { return pawns; }
         }
@@ -41,7 +41,7 @@ namespace recursive_draughts
             {
                 throw new Exception();
             }
-            for (int i = 0; i < 20; i++)
+            for(int i = 0; i<20; i++)
             {
                 var pawn = new Pawn(colour);
                 pawn.Id = i;
