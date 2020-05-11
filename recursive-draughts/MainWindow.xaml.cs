@@ -1,4 +1,5 @@
 ﻿using recursive_draughts.architecture;
+using Autofac;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,12 +22,19 @@ namespace recursive_draughts
     /// </summary>
     public partial class MainWindow : Window
     {
-        private readonly ViewModel _viewModel;
+        private readonly IViewModel _viewModel;
 
         public MainWindow()
         {
+            //Autofac IoC container initialization
+            var container = ContainerConfig.Configure();
+
+            using (var scope = container.BeginLifetimeScope())
+            {
+                _viewModel = scope.Resolve<IViewModel>();
+            }
+
             InitializeComponent();
-            _viewModel = new ViewModel();
 
             DataContext = _viewModel;
         }

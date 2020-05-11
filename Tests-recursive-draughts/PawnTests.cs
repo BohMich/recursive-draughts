@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using NUnit.Framework;
-using recursive_draughts;
+﻿using NUnit.Framework;
+using recursive_draughts.architecture.DataObjects;
 
 namespace Tests_recursive_draughts
 {

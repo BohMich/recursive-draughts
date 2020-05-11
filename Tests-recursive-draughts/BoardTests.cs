@@ -1,13 +1,7 @@
 ﻿using NUnit.Framework;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using recursive_draughts;
-using System.Net.Mail;
-using NUnit.Framework.Constraints;
 using Moq;
-using Newtonsoft.Json.Bson;
-using System.Security.Cryptography.X509Certificates;
+using recursive_draughts.architecture.DataObjects;
 
 namespace Tests_recursive_draughts
 {
@@ -200,11 +194,11 @@ namespace Tests_recursive_draughts
             }
         }
         [Test]
-        public void ShouldReturnPos0x4AsBlackPawn()
+        public void ShouldReturnPos0x3AsBlackPawn()
         {
-            var position = CheckPawnPosition(0, 4);
-            var expected = Team._COLOURS[1];
-            var actual = position.Pawn.Colour;
+            var position = CheckPawnPosition(0, 3);
+            var expected = Team._COLOURS[1].ToString();
+            var actual = position.Pawn.Colour.ToString();
 
             Assert.AreEqual(expected, actual);
 

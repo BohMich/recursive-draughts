@@ -1,13 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Windows;
-using System.Xml;
-using NuGet.Frameworks;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using NUnit.Framework.Internal;
-using recursive_draughts;
-
+using recursive_draughts.architecture.DataObjects;
 namespace Tests_recursive_draughts
 {
     [TestFixture]

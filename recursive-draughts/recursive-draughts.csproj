@@ -8,6 +8,18 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="interfaces\**" />
+    <Compile Remove="NewFolder\**" />
+    <EmbeddedResource Remove="interfaces\**" />
+    <EmbeddedResource Remove="NewFolder\**" />
+    <None Remove="interfaces\**" />
+    <None Remove="NewFolder\**" />
+    <Page Remove="interfaces\**" />
+    <Page Remove="NewFolder\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Autofac" Version="5.1.4" />
     <PackageReference Include="Moq" Version="4.14.1" />
   </ItemGroup>
 

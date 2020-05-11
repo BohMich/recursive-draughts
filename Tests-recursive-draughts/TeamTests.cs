@@ -1,11 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
-using System.Windows.Automation.Peers;
-using Moq;
-using NUnit.Framework;
-using recursive_draughts;
+﻿using NUnit.Framework;
+using recursive_draughts.architecture.DataObjects;
 
 namespace Tests_recursive_draughts
 {

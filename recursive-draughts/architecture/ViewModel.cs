@@ -3,11 +3,12 @@ using System.ComponentModel;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Windows.Input;
+using recursive_draughts.architecture.DataObjects;
 
 namespace recursive_draughts.architecture
 {
-    public class ViewModel : INotifyPropertyChanged
-    { 
+    public class ViewModel : INotifyPropertyChanged, IViewModel
+    {
         private string display;
         private RelayCommand _commandStart;
         private RelayCommand _commandStartNewGame;
@@ -18,9 +19,9 @@ namespace recursive_draughts.architecture
         {
             get
             {
-                if(_commandStart == null)
+                if (_commandStart == null)
                 {
-                    _commandStart = new RelayCommand(o => { HandleTestClick(); } , o => true);
+                    _commandStart = new RelayCommand(o => { HandleTestClick(); }, o => true);
                 }
                 return _commandStart;
             }
@@ -51,39 +52,60 @@ namespace recursive_draughts.architecture
         {
             var fields = _draughts.GetFields();
             string display = "";
-            
-            for(int y = 0; y < 10; y++)
+
+            display += ("  ");
+            for (int i = 0; i < 10; i++)
             {
-                for(int x = 0; x < 10; x++)
+                display += ("  ");
+                display += (i.ToString());
+                display += (" ");
+            }
+
+            display += "\n";
+            for (int y = 0; y < 10; y++)
+            {
+                display += (y);
+                display += (" | ");
+                for (int x = 0; x < 10; x++)
                 {
-                    if(fields[x,y].Pawn != null)
+
+                    if (fields[x, y].Pawn != null)
                     {
-                        display += " ";
+
                         display += fields[x, y].Pawn.Colour;
-                        display += " ";
+
                     }
                     else
                     {
-                        display += " _ ";
+                        display += "_";
                     }
+                    display += (" | ");
                 }
                 display += "\n";
             }
 
+            display += ("  ");
+            for (int i = 0; i < 10; i++)
+            {
+                display += ("  ");
+                display += (i.ToString());
+                display += (" ");
+            }
+
             StringBuilder temp = new StringBuilder();
-            temp.Insert(0,display);
-            temp.Replace(Team._COLOURS[0].ToString(), "O");
-            temp.Replace(Team._COLOURS[1].ToString(), "X");
+            temp.Insert(0, display);
+            temp.Replace(Team._COLOURS[0].ToString(), "0");
+            temp.Replace(Team._COLOURS[1].ToString(), "#");
 
             display = temp.ToString();
 
             return display;
         }
 
-        public ViewModel()
+        public ViewModel(IDraughts draughts)
         {
             display = "DISPLAY INITIALIZED";
-            _draughts = new Draughts();
+            _draughts = draughts;
         }
 
 
@@ -101,16 +123,16 @@ namespace recursive_draughts.architecture
 
         private void OnPropertyChanged(string propertyName)
         {
-            if(PropertyChanged != null)
+            if (PropertyChanged != null)
             {
                 PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
             }
         }
 
-        
+
     }
 
-    
- 
+
+
 
 }

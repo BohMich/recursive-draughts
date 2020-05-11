@@ -4,7 +4,7 @@ using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Windows.Automation;
 
-namespace recursive_draughts
+namespace recursive_draughts.architecture.DataObjects
 {
     public class Board : IBoard
     {
@@ -73,6 +73,18 @@ namespace recursive_draughts
                     {
                         emptyField = false; //switch next iteration will place the pawn.
                     }
+
+                    if (x == 9)
+                    {
+                        if (emptyField)
+                        {
+                            emptyField = false;
+                        }
+                        else if (!emptyField)
+                        {
+                            emptyField = true;
+                        }
+                    }
                 }
             }
 
@@ -91,15 +103,24 @@ namespace recursive_draughts
 
                         //set next id.
                         pawnCount++;
-
-                        if (x != 9)  //prevent parallel stacking of pawns
-                        {
-                            emptyField = true;
-                        }
+                        
+                        emptyField = true;
                     }
                     else
                     {
                         emptyField = false; //switch next iteration will place the pawn.
+                    }
+
+                    if (x == 9)
+                    {
+                        if (emptyField)
+                        {
+                            emptyField = false;
+                        }
+                        else if (!emptyField)
+                        {
+                            emptyField = true;
+                        }
                     }
                 }
             }
