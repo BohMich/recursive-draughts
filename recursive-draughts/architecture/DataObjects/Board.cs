@@ -46,6 +46,7 @@ namespace recursive_draughts.architecture.DataObjects
             }
             return pawns;
         }
+
         public void AddPawn(int x, int y, IPawn pawn)
         {
             _fields[x, y].Pawn = pawn;

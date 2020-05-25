@@ -237,7 +237,6 @@ namespace Tests_recursive_draughts
             Assert.AreEqual(expected,actual);
         }
 
-
         private void CheckFailTryCatch(int x, int y)
         {
             try

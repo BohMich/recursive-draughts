@@ -9,9 +9,13 @@ namespace recursive_draughts.architecture
 {
     public class ViewModel : INotifyPropertyChanged, IViewModel
     {
-        private string display;
+        private string display;     //textbased representation of the board.
+        private string output;      //textblock which outputs current game state.
+        private string input;       //textbox which takes player's input.
+        
         private RelayCommand _commandStart;
         private RelayCommand _commandStartNewGame;
+        private RelayCommand _commandSendRequest;
 
         private IDraughts _draughts;
 
@@ -37,6 +41,17 @@ namespace recursive_draughts.architecture
                 return _commandStartNewGame;
             }
         }
+        public ICommand cmdSendRequest
+        {
+            get
+            {
+                if (_commandSendRequest == null)
+                {
+                    _commandSendRequest = new RelayCommand(o => { SendUserInput(); }, o => true);
+                }
+                return _commandSendRequest;
+            }
+        }
 
         private void HandleTestClick()
         {
@@ -46,8 +61,14 @@ namespace recursive_draughts.architecture
         {
             _draughts.StartNewGame();
             Display = ResetDisplay();
+            Output = "Welcome to draughts by Mike. \n Please choose your action.";
         }
+        private void SendUserInput()
+        { 
+            Output = Input;
 
+
+        }
         private string ResetDisplay()
         {
             var fields = _draughts.GetFields();
@@ -116,6 +137,24 @@ namespace recursive_draughts.architecture
             {
                 display = value;
                 OnPropertyChanged("Display");
+            }
+        }
+        public string Output
+        {
+            get { return output; }
+            set
+            {
+                output = value;
+                OnPropertyChanged("Output");
+            }
+        }
+        public string Input
+        {
+            get { return input; }
+            set
+            {
+                input = value;
+                OnPropertyChanged("Input");
             }
         }
 
